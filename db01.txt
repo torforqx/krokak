@@ -1,0 +1,68 @@
+-- @D:\Book_Write_SQL\SQL_Book_1\01_Country.txt
+--  =======================================================
+--  สร้าง  Schema ใน  Database  User  ชื่อ Admindb
+--  =======================================================
+connect db_user/db_password
+--  กำหนดให้ใน 1 หน้าจอให้แสดงผล 35 บรรทัด
+set  pages 35
+--  กำหนดให้ใน 1 บรรทัดแสดงข้อความ  130 ตัวอักษร
+set lines 130                         
+--  กำหนดให้กดปุ่มใดๆ เพื่อพิจารณาข้อมูลในแต่ละหน้าจอ
+set pause on
+--  กำหนดให้ผลลัพธ์ที่เกิดจากการประมวลผลบน Database Server ให้มาแสดงที่หน้าจอ Client
+set serveroutput on
+--  กำหนดให้ล้างข้อมูลบนจอภาพ
+clear screen 
+
+DROP  TABLE  SetProvince;
+DROP  TABLE  SetPart;
+DROP  TABLE  SetCountry;
+
+CREATE  TABLE  SetCountry_66050207
+	(SctCode		NUMBER(4),
+	SctTName		VARCHAR2(40)
+		CONSTRAINT	Nn1_Sct	NOT	NULL,
+	SctTAbbrv		VARCHAR2(10),
+	SctEName		VARCHAR2(40),
+	SctEAbbrv		VARCHAR2(10),
+	SctLastUser		CHAR(10),
+	SctCrtDt			DATE,
+	SctLastMod		DATE,
+	CONSTRAINT	Pk_Sct_66050207		PRIMARY	KEY(SctCode));
+
+CREATE  TABLE  SetPart_6605027
+	(SprCode			CHAR(1),
+	SprTName		VARCHAR2(40)
+		CONSTRAINT	Nn1_Spr_66050207	NOT NULL,
+	SprTAbbrv		VARCHAR2(10),
+	SprEName		VARCHAR2(40),
+	SprEAbbrv		VARCHAR2(10),
+	SprSctCode		NUMBER(4),
+	SprLastUser		CHAR(10),
+	SprCrtDt			DATE,
+	SprLastMod		DATE,
+	CONSTRAINT	Pk_Spr_66050207		PRIMARY	KEY(SprCode),
+	CONSTRAINT	Fk_SprSct_66050207	FOREIGN	KEY(SprSctCode)
+		REFERENCES	SetCountry_66050207(SctCode));
+
+CREATE  TABLE  SetProvince_66050207
+	(SpvCode			NUMBER(2),
+	SpvTName		VARCHAR2(40)
+		CONSTRAINT	Nn1_Spv_66050207	NOT NULL,
+	SpvTAbbrv		VARCHAR2(10),
+	SpvEName		VARCHAR2(40),
+	SpvEAbbrv		VARCHAR2(10),
+	SpvSprCode		CHAR(1),
+	SpvLastUser		CHAR(10),
+	SpvCrtDt			DATE,
+	SpvLastMod		DATE,
+	CONSTRAINT	Pk_Spv_66050207		PRIMARY	KEY(SpvCode),
+	CONSTRAINT	Fk_SpvSpr_66050207	FOREIGN	KEY(SpvSprCode)
+		REFERENCES	SetPart_66050207(SprCode));
+
+--  ให้แสดงผลว่าใน  Database  User ปัจจุบันมีตารางที่ตัวเองเป็นเจ้าของมีชื่ออะไรบ้าง
+SELECT  Table_Name  FROM  USER_TABLES Order By 1;    
+
+--  ให้แสดงผลว่าในตารางที่ชื่อ SetCountry  มีโครงสร้างอะไรบ้าง
+Desc   SetCountry_66050207
+
