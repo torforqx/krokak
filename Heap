@@ -1,76 +1,7 @@
 import java.util.Arrays;
 
 public class MyMinHeap {
-    public static void main(String args[]) {
-        MyMinHeap min = new MyMinHeap();
-        min.insert(3);
-        min.insert(5);
-        min.insert(2);
-        min.insert(1);
-        min.insert(9);
 
-        System.out.println(min.remove());
-        System.out.println(min.remove());
-        System.out.println(min.remove());
-        System.out.println(min.remove());
-        System.out.println(min.remove());
-    }
+    //sawadeekunpreepree
 
-    int MAX_SIZE = 6;
-    int heap[] = new int[MAX_SIZE];
-    int index = 0;
-
-    public void insert(int x) {
-        heap[index] = x;
-        index++;
-        
-        int cur = index-1, parent = (cur-1)/2;
-        while (parent >= 0 && heap[cur] < heap[parent]) {
-            swapValueAtIndex(cur, parent);
-            cur = parent;
-            parent = (cur-1)/2;
-        }
-    }
-
-    public int remove() {
-        if (index == 0)
-            return -1;
-
-        int smallest = heap[0];
-        heap[0] = 0;
-
-        index--;
-        swapValueAtIndex(0, index);
-
-        int cur = 0, left = 1, right = 2;
-
-        while ((left < index && heap[cur] > heap[left]) ||
-               (right < index && heap[cur] > heap[right])) 
-        {
-            int leftValue = (left < index ? heap[left] : Integer.MAX_VALUE);
-            int rightValue = (right < index ? heap[right] : Integer.MAX_VALUE);
-            int minIndex = (leftValue <= rightValue ? left : right);
-
-            swapValueAtIndex(cur, minIndex);
-            cur = minIndex;
-            left  = (minIndex*2)+1;
-            right = (minIndex*2)+2;
-        }
-
-        return smallest;
-    }
-
-    @Override
-    public String toString() {
-        return Arrays.toString(Arrays.copyOfRange(heap, 0, index));
-    }
-
-    private void swapValueAtIndex(int a, int b) {
-        int tmp = heap[a];
-        heap[a] = heap[b];
-        heap[b] = tmp;
-    }
-
-    //por muangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvq
-    //wrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrweuangfdsfdsfsdfsfdsfdsfdsdfsdvzcxvqwrrwe
 }
